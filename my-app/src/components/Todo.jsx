@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-
+function AddTodo(){
+    <div>
+        <input placeholder="Add a todo " value={text} onChange={handleChange} />
+        <button onClick={handleAdd}>Add Todo</button>
+    </div>
+}
 
 function Todo() {
 
@@ -29,10 +34,6 @@ function Todo() {
 
     return <div>
         <h1>sahil Todo app</h1>
-        <div>
-            <input placeholder="Add a todo " value={text} onChange={handleChange} />
-            <button onClick={handleAdd}>Add Todo</button>
-        </div>
         <div>
             {todos.map((todo)=>
             <div key= {todo.id}>{todo.title}-{todo.status ? "completed" : "not completed"}</div>
