@@ -1,16 +1,12 @@
 import { useState } from "react";
 
+const [ text, setText ]= useState("")
+    
+const [todos, setTodos] = useState([])
+
 function AddTodo(){
-    <div>
-        <input placeholder="Add a todo " value={text} onChange={handleChange} />
-        <button onClick={handleAdd}>Add Todo</button>
-    </div>
-}
 
-function Todo() {
-
-    const [ text, setText ]= useState("")
-    const [todos, setTodos] = useState([])
+ 
 
     const handleChange = (e) =>{
         setText(e.target.value)
@@ -30,6 +26,24 @@ function Todo() {
         setTodos(todolistafterAddingitem)
         setText("")
     }
+
+
+
+    <div>
+        <input placeholder="Add a todo " value={text} onChange={handleChange} />
+        <button onClick={handleAdd}>Add Todo</button>
+    </div>
+
+
+}
+
+function Todo() {
+
+
+
+    
+
+   
     console.log(todos)
 
     return <div>
