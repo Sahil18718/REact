@@ -10,7 +10,7 @@ const App = () => {
 
   const apiUrl = useMemo(() => `https://jsonplaceholder.typicode.com/todos/${inputValue}`, [inputValue]);
 
-  // taking props from other file and working on this page
+  // taking props from other file and working on this page2
   const { data, loading, error } = useApi(apiUrl);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const App = () => {
   return (
     <div>
       <h1>React API App</h1>
+      
       <input type="text" value={inputValue} onChange={handleInputChange} ref={inputRef} />
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}

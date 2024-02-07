@@ -1,61 +1,84 @@
 import { useState } from "react";
+import AddTodo from "./AddTodo";
+import TodoItem from "./TodoItem";
+import { useMemo } from "react";
+import Counter from "./counter";
+import TodoRef from "./useRef";
 
-const [ text, setText ]= useState("")
+
+function Todo() {
     
-const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState([])
 
-function AddTodo(){
-
- 
-
-    const handleChange = (e) =>{
-        setText(e.target.value)
-    }
-
-    const handleAdd = () =>{
+    const handleAdd = (text) =>{
         
         const newitem = {
             id: Date.now() + Math.random() + text,
             title:text,
-            status:false
+            status:false,
         }
 
         const todolistafterAddingitem = [...todos,newitem]
 
 
         setTodos(todolistafterAddingitem)
-        setText("")
+
     }
 
+    const handleDelete = (id) =>{
+        const deleteTodo = todos.filter((todo) => todo.id !== id);
+        setTodos(deleteTodo)
+       
+
+    }
+
+    const handleToggle = (id) =>{
+        const updatedTodos = todos.map((todo) => todo.id === id ? { ...todo, status: !todo.status } : todo
+        );
+        setTodos(updatedTodos);
+      
+    }
+
+    // const memoeffect = useEffect(()=>{
+
+    // })
+
+    const memoizedTodos = useMemo(() => todos, [todos]);
+
+    // Memoize the functions passed as props to TodoItem
+    const memoizedHandleDelete = useMemo(() => handleDelete, []);
+    const memoizedHandleToggle = useMemo(() => handleToggle, []);
 
 
+    // console.log( memoizedTodos)
+
+    return (
     <div>
-        <input placeholder="Add a todo " value={text} onChange={handleChange} />
-        <button onClick={handleAdd}>Add Todo</button>
-    </div>
-
-
-}
-
-function Todo() {
-
-
-
-    
-
-   
-    console.log(todos)
-
-    return <div>
+        
+        <TodoRef/>
         <h1>sahil Todo app</h1>
+        <Counter/>
+        
+        <AddTodo handleAdd={handleAdd}/>
         <div>
-            {todos.map((todo)=>
-            <div key= {todo.id}>{todo.title}-{todo.status ? "completed" : "not completed"}</div>
-            )}
+            {todos.map((todo)=>(
+            <TodoItem 
+            id={todo.id}
+            key={todo.id}
+            title={todo.title}
+            status={todo.status}
+            handleDelete={memoizedHandleDelete}
+            handleToggle = {memoizedHandleToggle}
+            />
+            ))}
         </div>
     </div>
+    )
 }
 
-export default Todo;
+
+
+
+export default Todo ;
 
 
