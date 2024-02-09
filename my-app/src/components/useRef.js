@@ -6,19 +6,37 @@ function TodoRef()  {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [isValid, setValid] = useState(true);
+  const [todos,setTodos] = useState([])
   
   const validateForm = () => {
     const username = usernameRef.current.value;
     const password = passwordRef.current.value;
 
-    console.log(username)
+
 
     return username.trim() !== '' && password.trim() !== '';
   };
 
+  const handleAdd = (text) =>{
+    const newitem = {
+      title:usernameRef,
+      password:passwordRef
+    }
+
+    const addingtodoitem = {...todos, newitem}
+    setTodos(addingtodoitem)
+    console.log(addingtodoitem)
+  }
+
+  // const handleAdd = (text) =>{
+  //   handleAdd(text)
+  //   setText("")
+  // }
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
   const isFormValid = validateForm();
 
   if (!isFormValid) {
@@ -32,6 +50,7 @@ function TodoRef()  {
     <div>
       <h1>React Form with useRef</h1>
       <form onSubmit={handleSubmit}>
+      <button onClick={handleAdd}>add data</button>
         <div>
           <label htmlFor="username">Username:</label>
           <input type="text" id="username" ref={usernameRef} />
@@ -43,6 +62,9 @@ function TodoRef()  {
         {!isValid && <p style={{ color: 'red' }}>Please fill out all fields.</p>}
         <button type="submit">Submit</button>
       </form>
+      <p>
+
+      </p>
     </div>
   );
 };
