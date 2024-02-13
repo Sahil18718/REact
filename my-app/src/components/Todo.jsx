@@ -39,10 +39,6 @@ function Todo() {
       
     }
 
-    // const memoeffect = useEffect(()=>{
-
-    // })
-
     const memoizedTodos = useMemo(() => todos, [todos]);
 
     // Memoize the functions passed as props to TodoItem
